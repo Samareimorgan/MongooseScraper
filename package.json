@@ -1,0 +1,41 @@
+{
+  "name": "mongoosescraper",
+  "version": "1.0.0",
+  "description": "A Web App using MOngoose that scrapes information from a different website",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Samareimorgan/MongooseScraper.git"
+  },
+  "keywords": [
+    "Node",
+    "Mongoose",
+    "Express",
+    "Handlebars"
+  ],
+  "author": "Samarei Morgan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Samareimorgan/MongooseScraper/issues"
+  },
+  "homepage": "https://github.com/Samareimorgan/MongooseScraper#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^5.3.14",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.7",
+    "nodeunit": "^0.11.3"
+  }
+}
