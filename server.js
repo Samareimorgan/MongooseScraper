@@ -31,5 +31,12 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main"}));
 app.set("view engine", "handelbars");
 
+// Connection with MongoDB
+mongoose.connect("mongodb://localhost/mongooseScraper", { useNewUrlParser: true });
 
-//
+// Start the server
+app.listen(PORT, function() {
+    console.log("App running on port " + PORT + "!");
+  });
+
+
