@@ -1,22 +1,21 @@
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// DEPENDENCIES
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 var express = require("express");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-
-//Require scraping tools
-var axios = require("axios");
-var cheerio = require("cheerio");
-
-//Require all data models
-var db = require("./models");
+var exphbs = require("express-handlebars");
 
 //Declare Port 
-var PORT = process.env.PORT|8080;  //process.env.PORT is for heroku
+var PORT = process.env.PORT|8081;  //process.env.PORT is for heroku
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// MIDDLEWARE
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //Get app instance of Express
-var app = require("express");
-
-
-//Configure Middleware
+var app = express();
 
 //use morgan to log requests
 app.use(logger("dev"));
@@ -25,18 +24,42 @@ app.use(logger("dev"));
 app.use(express.urlencoded({ extendend: true }));
 app.use(express.json());
 
-//Set up Handlebars
-var exphbs = require("express-handlebars");
-
+//Set up handlebars
 app.engine("handlebars", exphbs({ defaultLayout: "main"}));
-app.set("view engine", "handelbars");
+app.set("view engine", "handlebars");
 
-// Connection with MongoDB
-mongoose.connect("mongodb://localhost/mongooseScraper", { useNewUrlParser: true });
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// MONGOOSE CONFIG
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+//if deployed, use deployed db or else use local database
+var MONGOD_URI = process.env.MONGOD_URI || ("mongodb://localhost/MongooseScraper", { useNewUrlParser: true });
+//connect to MongoDB
+
+mongoose.connect(MONGOD_URI)
+ .then(function() {
+   console.log("connected to MongoDB");
+ })
+ .catch(function(err) {
+    console.log(err);
+ });
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// ROUTER
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  
+//Require router
+var routes = require("./controllers");
+app.use(routes);
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// PORT LISTENER
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // Start the server
-app.listen(PORT, function() {
-    console.log("App running on port " + PORT + "!");
+app.listen(function(PORT) {
+    console.log("App running on port" + PORT  + "!");
   });
 
 

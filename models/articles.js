@@ -26,13 +26,13 @@ var articleSchema = new Schema ({
     },
     //links to the notes that are assocaited with the article, through the note id 
     notes: {
-        type: Schema.Type.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "notes"
     }
 });
 
 //create model from the above Schema 
-var Articles = mongoose.model("Articles",ArticleSchema);
+var Articles = mongoose.model("Articles", articleSchema);
 
 //export Article model
 module.export = Articles;
