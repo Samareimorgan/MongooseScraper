@@ -6,6 +6,17 @@ var cheerio = require("cheerio");
 
 var db = require("../models");
 
+//Initial page visit
+router.get('/', function (req, res){
+
+ document.getElementsByClassName("scrape").onclick = function(event) {
+   event.preventDefault();
+  // Scrape data
+   res.redirect('/scrape');
+ };
+
+});
+
 //Scraping 
 router.get("/scrape", function(req, res) {
   // First, we grab the body of the html with axios

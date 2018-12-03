@@ -1,8 +1,9 @@
-// Grab the articles as a json 
-//Make a 
+// On click of the scrape button - make ajax call to get articles
+$(document).on("click","scrape", function() {
 
 
-$(document).on("click", "p", function() {
+
+  //++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // Empty the notes from the note section
     $("#notes").empty();
     // Save the id from the p tag
