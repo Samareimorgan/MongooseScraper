@@ -1,4 +1,4 @@
-//Dependencie
+//Dependencies
 var express = require("express");
 var router = express.Router();
 var axios = require("axios");
@@ -81,17 +81,19 @@ router.get("/articles/:id", function(req,res) {
     })
 });
 
-// route to get all notes and render on the notes page
-router.get("/notes", function(req, res) {
-  notes.all(function(data) {
-    console.log (data);
-    var hbsObject = {
-      notes: data
-    };
-    console.log(hbsObject);
-    res.render("notes", hbsObject);
-  });
+//Save and/or update Article's Note
+router.post("/articles/:id", function(req,res) {
+  db.Notes.create(req.body)
+    .then(function(dbNote) {
+      return db.Articles.findOneAndUpdate({_id: req.params.id }, {note: dbNote._id}, {new: true});
+    })
+    .then(function(dbArticle) {
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      res.json(err);
+    })
 });
 
 
-module.exports = router;
+module.exports = routes;

@@ -50,7 +50,7 @@ mongoose.connect(MONGOD_URI)
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   
 //Require router
-var routes = require("./controllers");
+var routes = require("./controllers/routes");
 app.use(routes);
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++
